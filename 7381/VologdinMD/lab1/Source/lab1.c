@@ -1,43 +1,50 @@
 #include <stdio.h>
 #include <stdlib.h>
 #define N 4
-char a[N];
+char arr[N];
 void rec(int l, int r)
 {
-    char v;
+    printf("call rec\n");
+    char temp;
     if (l==r)
     {
+        printf("Result ");
         for (int i=0;i<N;i++)
-            printf("%c ", a[i]);
+            printf("%c ", arr[i]);
         printf("\n");
     }
     else
         for (int i=l-1;i < r;i++)
         {
-            v=a[l-1];
-            a[l-1]=a[i];
-            a[i]=v;
+            if (l-1 != i)
+            {
+                temp=arr[l-1];
+                arr[l-1]=arr[i];
+                arr[i]=temp;
+            }
             rec(l+1,r);
-            v=a[l-1];
-            a[l-1]=a[i];
-            a[i]=v;
+            if (l-1 != i)
+            {
+                temp=arr[l-1];
+                arr[l-1]=arr[i];
+                arr[i]=temp;
+            }
         }
     return;
-
 }
 
 int main()
 {
-    char c;
+    char simv;
     for (int i=0;i<N;i++)
     {
-        scanf("%c",&c);
-        if (c != ' ')
-            a[i] = c;
+        scanf("%c",&simv);
+        if (simv != ' ')
+            arr[i] = simv;
         else
             i--;
     }
-
+    printf("\n");
     rec(1,N);
     return 0;
 }
