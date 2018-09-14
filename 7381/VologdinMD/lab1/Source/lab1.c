@@ -1,8 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #define N 4
-char arr[N];
-void rec(int l, int r)
+
+void rec(int l, int r, char *arr)
 {
     printf("call rec\n");
     char temp;
@@ -22,7 +22,7 @@ void rec(int l, int r)
                 arr[l-1]=arr[i];
                 arr[i]=temp;
             }
-            rec(l+1,r);
+            rec(l+1,r,arr);
             if (l-1 != i)
             {
                 temp=arr[l-1];
@@ -35,16 +35,17 @@ void rec(int l, int r)
 
 int main()
 {
+    char arr[N];
     char simv;
     for (int i=0;i<N;i++)
     {
         scanf("%c",&simv);
-        if (simv != ' ')
+        if (simv != ' ' && simv != '\n')
             arr[i] = simv;
         else
             i--;
     }
     printf("\n");
-    rec(1,N);
+    rec(1,N,arr);
     return 0;
 }
