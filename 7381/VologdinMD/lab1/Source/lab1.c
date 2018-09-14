@@ -4,6 +4,8 @@
 
 void rec(int l, int r, char *arr)
 {
+    for (int i=0;i<l-1;i++)
+    	printf("    ");
     printf("call rec\n");
     char temp;
     if (l==r)
@@ -30,6 +32,9 @@ void rec(int l, int r, char *arr)
                 arr[i]=temp;
             }
         }
+    for (int i=0;i<l-1;i++)
+    	printf("    ");
+    printf("end rec\n");
     return;
 }
 
