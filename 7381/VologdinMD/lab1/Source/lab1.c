@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <ctype.h>
 #define N 4
 
 void rec(int l, int r, char *arr)
@@ -32,9 +33,6 @@ void rec(int l, int r, char *arr)
                 arr[i]=temp;
             }
         }
-    for (int i=0;i<l-1;i++)
-    	printf("    ");
-    printf("end rec\n");
     return;
 }
 
@@ -45,8 +43,16 @@ int main()
     for (int i=0;i<N;i++)
     {
         scanf("%c",&simv);
-        if (simv != ' ' && simv != '\n')
+        if (!isspace(simv))
+        {
             arr[i] = simv;
+            for (int j=0;j<i;j++)
+                if (arr[i]==arr[j])
+                {
+                    printf("Sorry,you have the same symbols, try another\n");
+                    i--;
+                }
+        }
         else
             i--;
     }
