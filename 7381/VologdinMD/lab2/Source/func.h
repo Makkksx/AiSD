@@ -4,7 +4,6 @@
 #include <string.h>
 #include <stddef.h>
 
-// Описание структуры Shoulder
 typedef struct Shoulder
 {
     int length_left;
@@ -16,7 +15,7 @@ typedef struct Shoulder
 
 }Shoulder;
 
-// Создание структуры Shoulder
+// Create list
 
 Shoulder* createShoulder()
 {
@@ -29,7 +28,7 @@ Shoulder* createShoulder()
     create->right=NULL;
     return create;
 }
-
+//Clear list
 void clear(Shoulder *head)
 {
     if (!head)
@@ -45,5 +44,23 @@ void clear(Shoulder *head)
         clear(head->right);
     }
     free(head);
+    return;
+}
+
+//cleaning spaces
+void delete_space(FILE *f)
+{
+    char x[100];
+    int i=0;
+    while(!feof(f))
+    {
+        fscanf(f, "%c", &x[i]);
+        if (isspace(x[i]))   
+            i--;
+        i++;
+    }
+    fclose(f);
+    f = fopen("test.txt","w+");
+    fwrite(x,sizeof(char),i-1,f);
     return;
 }

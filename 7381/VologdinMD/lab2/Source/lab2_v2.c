@@ -5,7 +5,7 @@
 #include "func.h"
 
 //Reading and checking data
-int read(Shoulder *kor, FILE *f1)
+int balanced(Shoulder *kor, FILE *f1)
 {
     char x;
     int flag;
@@ -18,7 +18,7 @@ int read(Shoulder *kor, FILE *f1)
     fseek( f1 , -1 , SEEK_CUR );
     
     if (x != '(')
-    {
+    {   
         if (!isdigit(x))
             return 0;
         fscanf(f1, "%d", &kor->cargo_left);
@@ -29,7 +29,7 @@ int read(Shoulder *kor, FILE *f1)
     else
     {
         kor->left = createShoulder();
-        flag = read(kor->left,f1);
+        flag = balanced(kor->left,f1);
         if (!flag)
             return 0;
         kor->cargo_left += (kor->left->cargo_left + kor->left->cargo_right);
@@ -54,14 +54,14 @@ int read(Shoulder *kor, FILE *f1)
     else
     {
         kor->right = createShoulder();
-        flag = read(kor->right,f1);
+        flag = balanced(kor->right,f1);
         if (!flag)
             return 0;
         kor->cargo_right += (kor->right->cargo_left + kor->right->cargo_right);
 
     }
     fseek( f1 , 2 , SEEK_CUR );
-
+    printf("L %d %d R %d %d\n",kor->length_left, kor->cargo_left,kor->length_right,kor->cargo_right);
     if (kor->cargo_left * kor->length_left != kor->cargo_right * kor->length_right)
         return 0;
     return 1;
@@ -77,15 +77,19 @@ int main()
     input_file[strlen(input_file)-1] = '\0';
     FILE *f1;
     f1 = fopen(input_file, "r+");
+        
+
     if (!f1)
     {
         printf("Fail with the start file\n" );
        	return 0;
     }
+    delete_space(f1);
+    fseek( f1 , 0 , SEEK_SET );
     Shoulder* head = createShoulder();
     //Data checking
-    if (!(read(head, f1)))
-        printf("false\n");
+    if (!(balanced(head, f1)))
+        printf("weigth_or_length_false\n");
     else
         if (head->cargo_left * head->length_left != head->cargo_right * head->length_right)
             printf("false\n");
