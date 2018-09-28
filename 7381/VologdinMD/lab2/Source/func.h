@@ -48,7 +48,7 @@ void clear(Shoulder *head)
 }
 
 //cleaning spaces
-void delete_space(FILE *f)
+void delete_space(FILE *f, char*file)
 {
     char x[100];
     int i=0;
@@ -60,7 +60,7 @@ void delete_space(FILE *f)
         i++;
     }
     fclose(f);
-    f = fopen("test.txt","w+");
+    f = fopen(file,"w+");
     fwrite(x,sizeof(char),i-1,f);
     return;
 }

@@ -27,7 +27,7 @@ int balanced(Shoulder *kor, FILE *f1)
     }
     
     else
-    {
+    {  
         kor->left = createShoulder();
         flag = balanced(kor->left,f1);
         if (!flag)
@@ -53,6 +53,7 @@ int balanced(Shoulder *kor, FILE *f1)
     
     else
     {
+
         kor->right = createShoulder();
         flag = balanced(kor->right,f1);
         if (!flag)
@@ -84,7 +85,7 @@ int main()
         printf("Fail with the start file\n" );
        	return 0;
     }
-    delete_space(f1);
+    delete_space(f1,input_file);
     fseek( f1 , 0 , SEEK_SET );
     Shoulder* head = createShoulder();
     //Data checking
