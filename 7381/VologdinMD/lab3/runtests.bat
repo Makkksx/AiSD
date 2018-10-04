@@ -59,5 +59,3 @@ echo.
 echo Output data:
 cd ..
 Lab3.exe < Tests/test5.txt
-
-sleep 20s
