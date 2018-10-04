@@ -13,6 +13,7 @@ struct Stack
     struct node *head;
     int size;
 };
+//Functions for working with the stack
 struct Stack init()
 {
     struct Stack stack = {NULL, 0};
@@ -57,27 +58,35 @@ int isbkt(char bkt)
 }
 
 int main()
-{
+{   
+    
     struct Stack stack = init();
     char str[500];
+    //Reading data
     fgets(str,500,stdin);
     for (int i=0; i<strlen(str);i++)
     {
         char c = str[i];
         if (isbkt(c))
         {
+            //If the bracket is open, then push
             if (isopen(c))
             {
+                printf("Push %c\n",c);
                 push(&stack,c);
             }
             else
             {
+                //If the bracket covers the one on top of the stack, then pop
                 if (!IsEmpty(&stack))
                     switch (top(&stack))
                     {
                         case '(':
                             if (c == ')')
+                            {
+                                printf("pop %c\n", top(&stack));
                                 pop(&stack);
+                            }
                             else
                             {
                                 printf("%d - wrong position\n",i);
@@ -86,7 +95,10 @@ int main()
                             break;
                          case '[':
                             if (c == ']')
+                            {
+                                printf("pop %c\n", top(&stack));
                                 pop(&stack);
+                            }
                             else
                             {
                                 printf("%d - wrong position\n",i);
@@ -95,7 +107,10 @@ int main()
                             break;
                         case '{':
                             if (c == '}')
+                            {
+                                printf("pop %c\n", top(&stack));
                                 pop(&stack);
+                            }
                             else
                             {
                                 printf("%d - wrong position\n",i);
@@ -114,6 +129,6 @@ int main()
             }
         }
     }
-    printf("%s", IsEmpty(&stack) ? "correct" : "wrong, there are not enough closing brackets at the end\n");
+    printf("%s", IsEmpty(&stack) ? "correct\n" : "wrong, there are not enough closing brackets at the end\n");
     return 0;
 }
