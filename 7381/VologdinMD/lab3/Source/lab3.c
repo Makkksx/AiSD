@@ -8,17 +8,20 @@ struct node
     char value;
     struct node *next;
 };
+
 struct Stack
 {
     struct node *head;
     int size;
 };
+
 //Functions for working with the stack
 struct Stack init()
 {
     struct Stack stack = {NULL, 0};
     return stack;
 }
+
 void push(struct Stack *stk, char simv)
 {
     struct node *node = (struct node*)malloc(sizeof(struct node));
@@ -27,6 +30,7 @@ void push(struct Stack *stk, char simv)
     stk->head = node;
     stk->size++;
 }
+
 char pop(struct Stack *stk)
 {
     struct node *node = stk->head;
@@ -36,22 +40,27 @@ char pop(struct Stack *stk)
     stk->size--;
     return res;
 }
+
 char top(struct Stack *stk)
 {
     return (stk->head ? stk->head->value : 0);
 }
+
 int IsEmpty(struct Stack *stk)
 {
     return (!stk->size);
 }
+
 int isopen(char bkt)
 {
     return (bkt == '(' || bkt == '[' || bkt == '{');
 }
+
 int isclose(char bkt)
 {
      return (bkt == ')' || bkt == ']' || bkt == '}');
 }
+
 int isbkt(char bkt)
 {
     return (isopen(bkt) || isclose(bkt));
@@ -72,18 +81,24 @@ int main()
             //If the bracket is open, then push
             if (isopen(c))
             {
-                printf("Push %c\n",c);
+                //add tabs
+                for (int j=0;j<stack.size;j++)
+                    printf("    ");
+                printf("push %c\n",c);
                 push(&stack,c);
             }
             else
             {
-                //If the bracket covers the one on top of the stack, then pop
+                //If the bracket covers the one on top of the stack, then pop, else error
                 if (!IsEmpty(&stack))
                     switch (top(&stack))
                     {
                         case '(':
                             if (c == ')')
                             {
+                                //add tabs
+                                for (int j=0;j<stack.size-1;j++)
+                                    printf("    ");
                                 printf("pop %c\n", top(&stack));
                                 pop(&stack);
                             }
@@ -96,6 +111,9 @@ int main()
                          case '[':
                             if (c == ']')
                             {
+                                //add tabs
+                                for (int j=0;j<stack.size-1;j++)
+                                    printf("    ");
                                 printf("pop %c\n", top(&stack));
                                 pop(&stack);
                             }
@@ -108,6 +126,9 @@ int main()
                         case '{':
                             if (c == '}')
                             {
+                                //add tabs
+                                for (int j=0;j<stack.size-1;j++)
+                                    printf("    ");
                                 printf("pop %c\n", top(&stack));
                                 pop(&stack);
                             }
