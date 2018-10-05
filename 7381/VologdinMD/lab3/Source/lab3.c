@@ -65,6 +65,11 @@ int isbkt(char bkt)
 {
     return (isopen(bkt) || isclose(bkt));
 }
+void clear(struct Stack *stk)
+{
+    while (stk->size)
+        pop(stk);
+}
 
 int main()
 {   
@@ -99,8 +104,8 @@ int main()
                                 //add tabs
                                 for (int j=0;j<stack.size-1;j++)
                                     printf("    ");
-                                printf("pop %c\n", top(&stack));
-                                pop(&stack);
+                                printf("pop %c\n", pop(&stack));
+                        //        pop(&stack);
                             }
                             else
                             {
@@ -114,8 +119,8 @@ int main()
                                 //add tabs
                                 for (int j=0;j<stack.size-1;j++)
                                     printf("    ");
-                                printf("pop %c\n", top(&stack));
-                                pop(&stack);
+                                printf("pop %c\n", pop(&stack));
+                             //   pop(&stack);
                             }
                             else
                             {
@@ -129,8 +134,8 @@ int main()
                                 //add tabs
                                 for (int j=0;j<stack.size-1;j++)
                                     printf("    ");
-                                printf("pop %c\n", top(&stack));
-                                pop(&stack);
+                                printf("pop %c\n", pop(&stack));
+                             //   pop(&stack);
                             }
                             else
                             {
@@ -151,5 +156,6 @@ int main()
         }
     }
     printf("%s", IsEmpty(&stack) ? "correct\n" : "wrong, there are not enough closing brackets at the end\n");
+    clear(&stack);
     return 0;
 }
