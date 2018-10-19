@@ -1,11 +1,8 @@
 #include <iostream>
 #include <fstream>
 #include <cstdlib>
-#include <stddef.h>
 #define N 100
 typedef char type;
-
-std::ifstream infile ("Tests/test1.txt");
 
 template <typename T>
 int enterBT(T * array, int cur)
@@ -13,24 +10,19 @@ int enterBT(T * array, int cur)
     char bkt;
     char bkt1;
     char bkt2;
-   // std::cout<< cur;
-    infile >> array[cur++];
-  //  std::cout << array[cur-1];
-    infile >> bkt1;  //(
- //   std::cout << bkt1;
+    std::cin >> array[cur++];
+    std::cout << array[cur-1] << std::endl;
+    std::cin >> bkt1;  // '('
     if (bkt1 =='(')
     {
         cur = enterBT(array,cur);
-        infile >> bkt; // )
-//        std::cout << bkt;
+        std::cin >> bkt; // ')'
     }
-    infile >> bkt2; //(
- //  std::cout << bkt2;
+    std::cin >> bkt2; // '('
     if (bkt2 =='(' )
     {
         cur = enterBT(array,cur);
-        infile >> bkt; //)
-     //   std::cout << bkt;
+        std::cin >> bkt; // ')'
     }
     return cur;
 }
@@ -39,22 +31,19 @@ int main()
 {
     char bkt;
     int len;
-    infile >> bkt; //(
-  //  std::cout << bkt;
+    std::cin >> bkt; // '('
     type mas[N];
     len = enterBT(mas, 0);
-    infile >> bkt; //)
-//    std::cout << bkt <<std::endl;    
+    std::cin >> bkt; // ')'
     for (int i=0;i<len;i++)
     {
         for (int j = 0;j<i;j++)
             if (mas[i]==mas[j])
             {
-                std::cout << "True";
+                std::cout << "True, duplicate element is " << mas[i] << std::endl;
                 return (0);
             }
-      //  std::cout << mas[i];
     }
-    std::cout << "False";
+    std::cout << "False" << std::endl;
     return (0);
 }
